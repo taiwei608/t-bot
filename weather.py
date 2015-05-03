@@ -78,8 +78,8 @@ def get(city):
 		
 			returnStr = ""
 			if(len(weatherInfo)):
-				for date, info in weatherInfo.items():
-					returnStr = date + "\n" + info + "\n" + returnStr
+				for date, info in sorted(weatherInfo.items()):
+					returnStr += date + "\n" + info + "\n"
 			locationCity = "[%s]\n" % locationName
 			returnStr = locationCity + returnStr
 			print returnStr
