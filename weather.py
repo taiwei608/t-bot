@@ -18,7 +18,21 @@ def get(city):
 	print "parse data"
 	tree = ElementTree()
 	tree.parse("xmlfile.xml")
+	
+	if '台' in city:
+		city = city.replace("台", "臺")
 
+	city = city.decode("utf-8") 
+	'''
+	print city
+	print type(city)
+	print cityEncoded
+	print type(cityEncoded)
+	if(cityEncoded == u"高雄市"):
+		print "success"
+	else:
+		print "fail"
+	'''
 	'''
 	if '台' in city:
 		city = city.replace("台", "臺")
@@ -30,7 +44,7 @@ def get(city):
 	for location in tree.find("ns:dataset", NS).findall("ns:location", NS):
 		locationName = location.find("ns:locationName", NS).text
 		test = u"臺北市"
-		if locationName == test:
+		if locationName == city:
 			weatherInfo = dict()
 			weatherElements = location.findall("ns:weatherElement", NS) 
 			#print locationName
@@ -62,10 +76,13 @@ def get(city):
 					#print startTime + "~" + endTime + " " + elementName + " " + parameterName 
 					#print weatherInfo[startTime + endTime]
 		
-			returnStr = "[%s]\n" % locationName
+			returnStr = ""
 			if(len(weatherInfo)):
 				for date, info in weatherInfo.items():
-					returnStr += date + info
+					returnStr = date + "\n" + info + "\n" + returnStr
+			locationCity = "[%s]\n" % locationName
+			returnStr = locationCity + returnStr
 			print returnStr
+			return returnStr
 	return "無法查無資訊"
 

@@ -2,7 +2,7 @@ from line import LineClient, LineGroup, LineContact
 import re
 import regexp
 import WebCrawler
-
+import weather
 KeyFile = open("token", "r")
 AuthToken = KeyFile.read().strip()
 
@@ -32,6 +32,8 @@ while True:
             break
         elif m.match(r't-bot'):
             msg = "Dominus."
+        elif m.match(r'/Weather\s*(.*)'):
+            msg = str(weather.get(m.group(1)))
         elif re.search(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', msg, re.I):
             m = re.finditer(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', msg, re.I)
             print "Link detect"

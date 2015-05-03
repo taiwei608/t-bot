@@ -9,6 +9,6 @@ def main():
     print "Start running tester of weather"
     print u"高雄市"
     print "高雄市"
-    weather.get(u"高雄市")
+    weather.get("高雄市")
 if __name__ == "__main__":
     main()
