@@ -44,7 +44,7 @@ def get(city):
 	for location in tree.find("ns:dataset", NS).findall("ns:location", NS):
 		locationName = location.find("ns:locationName", NS).text
 		test = u"臺北市"
-		if locationName == city:
+		if locationName.find(city) != -1:
 			weatherInfo = dict()
 			weatherElements = location.findall("ns:weatherElement", NS) 
 			#print locationName
@@ -80,9 +80,9 @@ def get(city):
 			if(len(weatherInfo)):
 				for date, info in sorted(weatherInfo.items()):
 					returnStr += date + "\n" + info + "\n"
-			locationCity = "[%s]\n" % locationName
+			locationCity = "[%s天氣預報]\n" % locationName
 			returnStr = locationCity + returnStr
 			print returnStr
 			return returnStr
-	return "無法查無資訊"
+	return "查無資訊請輸入正確城市名稱"
 
