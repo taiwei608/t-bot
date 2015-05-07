@@ -19,10 +19,14 @@ def get(city):
 	tree = ElementTree()
 	tree.parse("xmlfile.xml")
 	
+	
 	if '台' in city:
 		city = city.replace("台", "臺")
 
 	city = city.decode("utf-8") 
+	if city == u"天龍國":
+		city = u"臺北市"
+
 	'''
 	print city
 	print type(city)
@@ -84,5 +88,5 @@ def get(city):
 			returnStr = locationCity + returnStr
 			print returnStr
 			return returnStr
-	return "查無資訊請輸入正確城市名稱"
+	return "查無資訊請輸入正確縣市名稱"
 
